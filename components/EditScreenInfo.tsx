@@ -33,6 +33,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
         </Text>
       </View>
 
+      {/* External link format */}
       <View style={styles.helpContainer}>
         <ExternalLink
           style={styles.helpLink}
