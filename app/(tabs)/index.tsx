@@ -1,10 +1,28 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextInput, Pressable } from 'react-native';
+import React, { useState } from 'react';
 
 // You might want to install a calendar library like 'react-native-calendars'
 import { Calendar } from 'react-native-calendars';
 import { Text, View } from '@/components/Themed';
 
 export default function TabOneScreen() {
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [dailyNotes, setDailyNotes] = useState<{ [key: string]: string }>({});
+  const [currentNoteInput, setCurrentNoteInput] = useState<string>('');
+
+  const handleDayPress = (day: { dateString: string; }) => {
+    setSelectedDate(day.dateString);
+    setCurrentNoteInput(dailyNotes[day.dateString] || '');
+  };
+
+  const handleSaveNote = () => {
+    setDailyNotes(prevNotes => ({
+      ...prevNotes,
+      [selectedDate]: currentNoteInput,
+    }));
+    console.log(`Note for ${selectedDate} saved: ${currentNoteInput}`);
+  };
+
   return (
     <View style={styles.container}>
       {/* Top half: Calendar Section */}
@@ -12,31 +30,49 @@ export default function TabOneScreen() {
         <Text style={styles.sectionTitle}>Calendar</Text>
         {/* Placeholder for the Calendar component */}
         <Calendar
-          // You can customize the Calendar component with props here
-          // For example:
-          // onDayPress={(day) => { console.log('selected day', day) }}
-          // markedDates={{ '2024-06-25': { selected: true, marked: true, selectedColor: 'blue' } }}
+          onDayPress={handleDayPress}
+          markedDates={{
+            [selectedDate]: { selected: true, selectedColor: '#000', textColor: '#000' }
+          }}
           theme={{
-            backgroundColor: '#22ffae', // This would set the background of the calendar's *entire wrapper*, often not what you want
-            calendarBackground: '#ff2222', // This specifically targets the calendar grid background to red
-            dayTextColor: '#000', // Example: make day numbers black
-            monthTextColor: '#000', // Example: make month text black 
-            arrowColor: '#000', // Example: make navigation arrows black
-            todayTextColor: 'red',
-            textDisabledColor: '#d9e1e8',
-            dotColor: '#00adf5',
+            backgroundColor: '#fff', // Dark background for the calendar component's overall area
+            calendarBackground: '#000', // Dark background for the calendar grid itself
+            dayTextColor: '#FFA400', // Orange text for day numbers
+            monthTextColor: '#fff', // White text for the month/year header
+            arrowColor: '#fff', // White arrows for navigation
+            todayTextColor: '#FFA400', // Orange text for 'Today'
+            todayBackgroundColor: '#fff', // White background for 'Today'
+            textDisabledColor: '#888', // Faded grey for days outside the current month
+            dotColor: '#fff', // White dots (for marked dates)
             selectedDotColor: '#ffffff',
             textMonthFontWeight: 'bold',
-            textDayHeaderFontWeight: 'bold',
+            textDayHeaderFontWeight: 'normal',
+            textSectionTitleColor: '#fff', // White text for weekday headers
           }}
         />
       </View>
 
       {/* Bottom half: Notes Section */}
       <View style={styles.notesContainer}>
-        <Text style={styles.sectionTitle}>Notes</Text>
-        <Text style={styles.noteText}>Add your notes here!</Text>
-        {/* You would typically have a list of notes or an input field here */}
+        <Text style={styles.sectionTitle}>Notes {selectedDate ? `for ${selectedDate}` : ''}</Text>
+        {
+          selectedDate ? (
+            <>
+              <TextInput
+                style={styles.noteInput}
+                multiline
+                placeholder="Type your note here..."
+                value={currentNoteInput}
+                onChangeText={setCurrentNoteInput}
+              />
+              <Pressable style={styles.saveButton} onPress={handleSaveNote}>
+                <Text style={styles.saveButtonText}>Save Note</Text>
+              </Pressable>
+            </>
+          ) : (
+            <Text style={styles.noteText}>Select a day on the calendar to add a note.</Text>
+          )
+        }
       </View>
     </View>
   );
@@ -46,11 +82,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#808080', // grey 
   },
   calendarContainer: {
     flex: 1, // Takes up the first half of the screen
-    backgroundColor: '#22ffae',
+    backgroundColor: '#660066', // purple
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
@@ -75,9 +111,30 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#fff',
   },
   noteText: {
     fontSize: 16,
     color: '#555',
+  },
+  noteInput: {
+    minHeight: 80,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    marginBottom: 10,
+    textAlignVertical: 'top', // For Android
+    color: '#000', // Ensure text is visible in light mode
+  },
+  saveButton: {
+    backgroundColor: '#660066',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
