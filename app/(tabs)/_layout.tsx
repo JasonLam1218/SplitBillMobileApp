@@ -1,6 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Link, Tabs, useNavigation } from 'expo-router';
 import { Pressable, useColorScheme, View } from 'react-native';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
 
 import Colors from '@/constants/Colors';
 
@@ -16,6 +17,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const navigation = useNavigation<DrawerNavigationProp<any>>();
 
   return (
     <Tabs
@@ -59,7 +61,7 @@ export default function TabLayout() {
             </View>
           ),
           headerLeft: () => (
-            <Pressable style={{ marginLeft: 15 }}>
+            <Pressable style={{ marginLeft: 15 }} onPress={() => navigation.openDrawer()}>
               {({ pressed }) => (
                 <FontAwesome
                   name="th"
@@ -102,7 +104,7 @@ export default function TabLayout() {
             </View>
           ),
           headerLeft: () => (
-            <Pressable style={{ marginLeft: 15 }}>
+            <Pressable style={{ marginLeft: 15 }} onPress={() => navigation.openDrawer()}>
               {({ pressed }) => (
                 <FontAwesome
                   name="th"

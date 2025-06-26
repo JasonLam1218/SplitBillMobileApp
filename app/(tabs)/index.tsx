@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, Pressable } from 'react-native';
+import { StyleSheet, TextInput, Pressable, Platform } from 'react-native';
 import React, { useState } from 'react';
 
 // You might want to install a calendar library like 'react-native-calendars'
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#F7F7F7', // Changed to match TabTwoScreen's background
+    backgroundColor: '#F7F7F7', 
   },
   calendarContainer: {
     flex: 1, // Takes up the first half of the screen
-    backgroundColor: '#660066', // purple
+    backgroundColor: '#000',
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+      },
+    }),
   },
   notesContainer: {
     flex: 1, // Takes up the second half of the screen
@@ -108,6 +113,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+      },
+    }),
   },
   sectionTitle: {
     fontSize: 20,
@@ -131,7 +141,7 @@ const styles = StyleSheet.create({
     color: '#000', // Ensure text is visible in light mode
   },
   saveButton: {
-    backgroundColor: '#660066',
+    backgroundColor: '#000',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
