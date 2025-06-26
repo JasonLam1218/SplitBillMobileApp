@@ -56,8 +56,10 @@ export default function TabOneScreen() {
       <View style={styles.notesContainer}>
         <Text style={styles.sectionTitle}>Notes {selectedDate ? `for ${selectedDate}` : ''}</Text>
         {
+          // if (selcected date, show note container) else (default text)
           selectedDate ? (
-            <>
+            <View style={styles.noteContentContainer}>
+              <Text style={styles.selectedDateDisplay}>Date: {selectedDate}</Text>
               <TextInput
                 style={styles.noteInput}
                 multiline
@@ -65,12 +67,12 @@ export default function TabOneScreen() {
                 value={currentNoteInput}
                 onChangeText={setCurrentNoteInput}
               />
-              <Pressable style={styles.saveButton} onPress={handleSaveNote}>
+              <Pressable style={styles.saveButton} onPress={handleSaveNote}> {/* saved locally */}
                 <Text style={styles.saveButtonText}>Save Note</Text>
               </Pressable>
-            </>
+            </View>
           ) : (
-            <Text style={styles.noteText}>Select a day on the calendar to add a note.</Text>
+            <Text style={styles.noteText}>Select a day on the calendar to add a note.</Text> // only shown before selecting the date
           )
         }
       </View>
@@ -119,6 +121,7 @@ const styles = StyleSheet.create({
   },
   noteInput: {
     minHeight: 80,
+    flex: 1, // maximize the size of the container
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 4,
@@ -136,5 +139,12 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+  selectedDateDisplay: {
+    marginBottom: 10,
+    color: '#555',
+  },
+  noteContentContainer: {
+    flex: 1,
   },
 });
