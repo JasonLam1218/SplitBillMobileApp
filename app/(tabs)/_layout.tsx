@@ -35,19 +35,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <View style={{ flexDirection: 'row', marginRight: 15 }}>
-              <Pressable style={{ marginRight: 15 }}>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="search"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -78,19 +68,9 @@ export default function TabLayout() {
         name="two"
         options={{
           title: '',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
           headerRight: () => (
             <View style={{ flexDirection: 'row', marginRight: 15 }}>
-              <Pressable style={{ marginRight: 15 }}>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="search"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -120,8 +100,8 @@ export default function TabLayout() {
       <Tabs.Screen 
         name="three"
         options={{
-          title: "Tab three", 
-          tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name='cog' color={color} />,
         }}
       />
     </Tabs>
