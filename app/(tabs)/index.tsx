@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#808080', // grey 
+    backgroundColor: '#F7F7F7', // Changed to match TabTwoScreen's background
   },
   calendarContainer: {
     flex: 1, // Takes up the first half of the screen

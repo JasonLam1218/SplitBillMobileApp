@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import { Pressable, useColorScheme, View } from 'react-native';
 
 import Colors from '@/constants/Colors';
 
@@ -32,29 +32,87 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Split Bill',
+          title: '',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
+            <View style={{ flexDirection: 'row', marginRight: 15 }}>
+              <Pressable style={{ marginRight: 15 }}>
                 {({ pressed }) => (
                   <FontAwesome
-                    name="info-circle"
+                    name="search"
                     size={25}
                     color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    style={{ opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
               </Pressable>
-            </Link>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="bell"
+                    size={25}
+                    color={Colors[colorScheme ?? 'light'].text}
+                    style={{ opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </View>
+          ),
+          headerLeft: () => (
+            <Pressable style={{ marginLeft: 15 }}>
+              {({ pressed }) => (
+                <FontAwesome
+                  name="th"
+                  size={25}
+                  color={Colors[colorScheme ?? 'light'].text}
+                  style={{ opacity: pressed ? 0.5 : 1 }}
+                />
+              )}
+            </Pressable>
           ),
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
+          title: '',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerRight: () => (
+            <View style={{ flexDirection: 'row', marginRight: 15 }}>
+              <Pressable style={{ marginRight: 15 }}>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="search"
+                    size={25}
+                    color={Colors[colorScheme ?? 'light'].text}
+                    style={{ opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="bell"
+                    size={25}
+                    color={Colors[colorScheme ?? 'light'].text}
+                    style={{ opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </View>
+          ),
+          headerLeft: () => (
+            <Pressable style={{ marginLeft: 15 }}>
+              {({ pressed }) => (
+                <FontAwesome
+                  name="th"
+                  size={25}
+                  color={Colors[colorScheme ?? 'light'].text}
+                  style={{ opacity: pressed ? 0.5 : 1 }}
+                />
+              )}
+            </Pressable>
+          ),
         }}
       />
       <Tabs.Screen 
