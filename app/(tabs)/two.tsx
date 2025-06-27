@@ -11,7 +11,7 @@ import RecentPaymentCard from '@/components/RecentPaymentCard'; // Import Recent
 export default function TabTwoScreen() {
   // State variable to store the amount entered by the user.
   // 'amount' holds the current value, and 'setAmount' is the function to update it.
-  const [amount, setAmount] = useState('0.00'); // Set initial value as per image, will be user input
+  const [amount, setAmount] = useState(0.00); // Initialize as a number
 
   // State variable to store the user's debit from others.
   // For now, it's hardcoded to 50.00 for demonstration purposes.
@@ -21,8 +21,8 @@ export default function TabTwoScreen() {
   // It filters out non-numeric characters to ensure only numbers (and a decimal point) are stored.
   const handleAmountChange = (text: string) => {
     // Regular expression to allow only digits (0-9) and a single decimal point.
-    const numericValue = text.replace(/[^0-9.]/g, '');
-    setAmount(numericValue);
+    const numericValue = parseFloat(text.replace(/[^0-9.]/g, ''));
+    setAmount(isNaN(numericValue) ? 0.00 : numericValue); // Ensure amount is always a number
   };
 
   return (
@@ -34,7 +34,7 @@ export default function TabTwoScreen() {
           <TextInput
             style={styles.balanceAmountInput}
             keyboardType="numeric"
-            value={amount}
+            value={amount.toFixed(2)} // Format the number to 2 decimal places for display
             onChangeText={handleAmountChange}
             placeholder="0.00"
             placeholderTextColor="#333"
@@ -47,42 +47,39 @@ export default function TabTwoScreen() {
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.pendingBillsScrollView}>
         <PendingBillCard
-          title="TODO: Bill Title 1"
-          amount="TODO: Amount 1"
+          title="Groceries Bill"
+          amount="$75.50"
           users={[
-            { id: '1', avatar: 'TODO: User Avatar URL 1' },
-            { id: '2', avatar: 'TODO: User Avatar URL 2' },
+            { id: '1', avatar: require('../../assets/images/icon.png') },
+            { id: '2', avatar: require('../../assets/images/icon.png') },
           ]}
         />
-        {/* add more group with the + button from the user */}
         <PendingBillCard
-          title="TODO: Bill Title 2"
-          amount="TODO: Amount 2"
+          title="Dinner with Friends"
+          amount="$120.00"
           users={[
-            { id: '3', avatar: 'TODO: User Avatar URL 3' },
-            { id: '4', avatar: 'TODO: User Avatar URL 4' },
+            { id: '3', avatar: require('../../assets/images/icon.png') },
+            { id: '4', avatar: require('../../assets/images/icon.png') },
           ]}
         />
-        {/* Add more PendingBillCard components as needed */}
       </ScrollView>
 
       <Text style={styles.sectionTitle}>Recent Payments</Text>
 
-      {/* Placeholder for Recent Payments cards */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <RecentPaymentCard
-          icon="TODO: Icon URL 1"
-          title="TODO: Payment Title 1"
-          date="TODO: Date 1"
-          amount="TODO: Amount 1"
-          persons={0} // TODO: Number of Persons
+          icon={require('../../assets/images/icon.png')}
+          title="Electricity Bill"
+          date="June 25, 2024"
+          amount="$85.00"
+          persons={3} 
         />
         <RecentPaymentCard
-          icon="TODO: Icon URL 2"
-          title="TODO: Payment Title 2"
-          date="TODO: Date 2"
-          amount="TODO: Amount 2"
-          persons={0} // TODO: Number of Persons
+          icon={require('../../assets/images/icon.png')}
+          title="Internet Bill"
+          date="June 20, 2024"
+          amount="$60.00"
+          persons={2} 
         />
       </ScrollView>
     </View>
