@@ -29,8 +29,8 @@ export default function TabTwoScreen() {
     <View style={styles.container}>
       <View style={styles.balanceContainer}>
         <Text style={styles.balanceLabel}>My Balance</Text>
-        <View style={styles.balanceAmountRow}> {/* New View to hold amount and arrow */}
-          <Text style={styles.currencySymbol}>$</Text> {/* Currency symbol */}
+        <View style={styles.balanceAmountRow}> 
+          <Text style={styles.currencySymbol}>$</Text> 
           <TextInput
             style={styles.balanceAmountInput}
             keyboardType="numeric"
@@ -54,7 +54,6 @@ export default function TabTwoScreen() {
             { id: '2', avatar: 'TODO: User Avatar URL 2' },
           ]}
         />
-        {/* add more group with the + button from the user */}
         <PendingBillCard
           title="TODO: Bill Title 2"
           amount="TODO: Amount 2"
@@ -63,26 +62,24 @@ export default function TabTwoScreen() {
             { id: '4', avatar: 'TODO: User Avatar URL 4' },
           ]}
         />
-        {/* Add more PendingBillCard components as needed */}
       </ScrollView>
 
       <Text style={styles.sectionTitle}>Recent Payments</Text>
 
-      {/* Placeholder for Recent Payments cards */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <RecentPaymentCard
           icon="TODO: Icon URL 1"
           title="TODO: Payment Title 1"
           date="TODO: Date 1"
           amount="TODO: Amount 1"
-          persons={0} // TODO: Number of Persons
+          persons={0} 
         />
         <RecentPaymentCard
           icon="TODO: Icon URL 2"
           title="TODO: Payment Title 2"
           date="TODO: Date 2"
           amount="TODO: Amount 2"
-          persons={0} // TODO: Number of Persons
+          persons={0} 
         />
       </ScrollView>
     </View>

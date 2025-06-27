@@ -1,9 +1,12 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import { Link, Stack, useRouter } from 'expo-router';
+import { StyleSheet, Pressable } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 
 export default function NotFoundScreen() {
+  const router = useRouter();
+
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
@@ -13,6 +16,10 @@ export default function NotFoundScreen() {
         <Link href="/" style={styles.link}>
           <Text style={styles.linkText}>Go to home screen!</Text>
         </Link>
+
+        <Pressable onPress={() => router.back()} style={styles.link}>
+          <Text style={styles.linkText}>Go back!</Text>
+        </Pressable>
       </View>
     </>
   );

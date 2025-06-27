@@ -5,6 +5,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
+import Colors from '../constants/Colors';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -48,19 +49,30 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Drawer screenOptions={{ headerShown: false }}>
+      <Drawer
+        screenOptions={{
+          headerShown: false, // hide the default side bar
+          drawerStyle: {
+            backgroundColor: Colors[colorScheme ?? 'light'].background,
+          },
+        }}
+      >
         <Drawer.Screen
           name="(tabs)"
           options={{
             drawerLabel: 'Home',
             title: 'Overview',
-          }}
-        />
-        <Drawer.Screen
-          name="modal"
-          options={{
-            drawerLabel: 'Modal',
-            title: 'Modal',
+            drawerInactiveTintColor: '#888', // others button
+            drawerActiveTintColor: '#000',
+            drawerLabelStyle: {
+              fontSize: 20, // Adjust text size
+              fontWeight: 'bold', // Make text bold
+              color: '#FFA400',
+              padding: 5,
+            },
+            drawerIcon: ({ color, size }) => (
+              <FontAwesome name="home" size={size} color={color} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -68,6 +80,24 @@ function RootLayoutNav() {
           options={{
             drawerLabel: 'Create New Group',
             title: 'Create New Group',
+            drawerInactiveTintColor: '#888', // others button
+            drawerActiveTintColor: '#000',
+            drawerLabelStyle: {
+              fontSize: 20, // Adjust text size
+              fontWeight: 'bold', // Make text bold
+              color: '#FFA400',
+              padding: 5,
+            },
+            drawerIcon: ({ color, size }) => (
+              <FontAwesome name="plus" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="[...missing]"
+          options={{
+            drawerItemStyle: { display: 'none' }, // This hides the item from the drawer
+            title: 'Oops!', // You can still set a title for the actual screen
           }}
         />
       </Drawer>

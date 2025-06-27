@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F7', 
   },
   calendarContainer: {
-    flex: 1, // Takes up the first half of the screen
+    flex: 3, // Changed from 1 to 3, making it take more space relative to notesContainer
     backgroundColor: '#000',
     borderRadius: 8,
     padding: 16,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     }),
   },
   notesContainer: {
-    flex: 1, // Takes up the second half of the screen
+    flex: 2, // Changed from 1 to 2, making it take less space relative to calendarContainer
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 16,
