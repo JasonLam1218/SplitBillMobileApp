@@ -11,7 +11,7 @@ import RecentPaymentCard from '@/components/RecentPaymentCard'; // Import Recent
 export default function TabTwoScreen() {
   // State variable to store the amount entered by the user.
   // 'amount' holds the current value, and 'setAmount' is the function to update it.
-  const [amount, setAmount] = useState('0.00'); // Set initial value as per image, will be user input
+  const [amount, setAmount] = useState('0'); // Set initial value as per image, will be user input
 
   // State variable to store the user's debit from others.
   // For now, it's hardcoded to 50.00 for demonstration purposes.
